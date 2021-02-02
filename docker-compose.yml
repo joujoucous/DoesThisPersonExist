@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    environment:
+      - POSTGRESQL_USERNAME=user
+      - POSTGRESQL_PASSWORD=user
+      - POSTGRESQL_DATABASE=AuthentificationDB
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./Authentification/data/initdb/:/docker-entrypoint-initdb.d
+      - ./Authentification/data/initdb/:/bitnami/postgresql
+  authentification:
+    build:
+      context: ./Authentification
+    ports:
+      - '5000:5000'
+    env_file:
+      - ./Authentification/.env.prod
