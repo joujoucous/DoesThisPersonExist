@@ -19,3 +19,8 @@ services:
       - '5000:5000'
     env_file:
       - ./Authentification/.env.prod
+  front:
+    build:
+      context: ./front
+    ports:
+      - '5001:3000'
