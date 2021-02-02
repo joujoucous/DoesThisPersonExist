@@ -28,3 +28,100 @@ Front/.env.test.local
 Front/.env.production.local
 # vercel
 Front/.vercel
+
+#FACES
+# Byte-compiled / optimized / DLL files
+Faces/__pycache__/
+Faces/*.py[cod]
+Faces/*$py.class
+# C extensions
+Faces/*.so
+# Distribution / packaging
+Faces/.Python
+Faces/env/
+Faces/build/
+Faces/develop-eggs/
+Faces/dist/
+Faces/downloads/
+Faces/eggs/
+Faces/.eggs/
+Faces/lib/
+Faces/lib64/
+Faces/parts/
+Faces/sdist/
+Faces/var/
+Faces/wheels/
+Faces/*.egg-info/
+Faces/.installed.cfg
+Faces/*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+Faces/*.manifest
+Faces/*.spec
+Faces/# Installer logs
+Faces/pip-log.txt
+Faces/pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+Faces/htmlcov/
+Faces/.tox/
+Faces/.coverage
+Faces/.coverage.*
+Faces/.cache
+Faces/nosetests.xml
+Faces/coverage.xml
+Faces/*.cover
+Faces/.hypothesis/
+# Translations
+Faces/*.mo
+Faces/*.pot
+# Django stuff:
+Faces/*.log
+Faces/local_settings.py
+# Flask stuff:
+Faces/instance/
+Faces/.webassets-cache
+# Scrapy stuff:
+Faces/.scrapy
+# Sphinx documentation
+Faces/docs/_build/
+# PyBuilder
+Faces/target/
+# Jupyter Notebook
+Faces/.ipynb_checkpoints
+# pyenv
+Faces/.python-version
+# celery beat schedule file
+Faces/celerybeat-schedule
+# SageMath parsed files
+Faces/*.sage.py
+# dotenv
+Faces/.env
+# virtualenv
+Faces/.venv
+Faces/venv/
+Faces/ENV/
+Faces/.vscode
+# Spyder project settings
+Faces/.spyderproject
+Faces/.spyproject
+# Rope project settings
+Faces/.ropeproject
+# mkdocs documentation
+Faces//site
+# mypy
+Faces/.mypy_cache/
+Faces/.DS_Store
+Faces/*.sqlite3
+Faces/media/
+Faces/*.pyc
+Faces/*.db
+Faces/*.pid
+
+# Ignore Django Migrations in Development if you are working on team
+# Only for Development only
+# **/migrations/**
+# !**/migrations
+# !**/migrations/__init__.py

@@ -8,7 +8,7 @@ services:
       - POSTGRESQL_PASSWORD=user
       - POSTGRESQL_DATABASE=AuthentificationDB
     ports:
-      - '5432:5432'
+      - '5002:5002'
     volumes:
       - ./Authentification/data/initdb/:/docker-entrypoint-initdb.d
       - ./Authentification/data/initdb/:/bitnami/postgresql
@@ -19,8 +19,28 @@ services:
       - '5000:5000'
     env_file:
       - ./Authentification/.env.prod
+    depends_on:
+      - postgresql
   front:
     build:
       context: ./front
     ports:
       - '5001:3000'
+  postgresqlFaces:
+    image: 'bitnami/postgresql:latest'
+    environment:
+      - POSTGRESQL_USERNAME=user
+      - POSTGRESQL_PASSWORD=user
+      - POSTGRESQL_DATABASE=FacesDB
+    ports:
+      - '5003:5003'
+    volumes:
+      - ./Faces/data/initdb/:/docker-entrypoint-initdb.d
+      - ./Faces/data/initdb/:/bitnami/postgresql
+  faces:
+    build:
+      context: ./Faces
+    ports:
+      - '5004:5004'
+    depends_on:
+      - postgresqlFaces
