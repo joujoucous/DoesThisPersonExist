@@ -7,14 +7,16 @@ const Home = () => (
   <div style={{backgroundColor: 'black'}}>
     <div class="content-center my-auto">
         <div class="title-brand">
-          <h1 class="presentation-title">Does it Exist ?</h1>
-          
+          <h1 class="stripe-text">Can you guess who's real ?</h1>
         </div>
     </div>
     <div class="imageContainer">
-            <img class="homeImage" src="/images/image.jpg"/>
-            <img class="homeImage" src="/images/image.jpg"/>
+      <div class="homeImage">
+      </div>
+      <div class="homeImage2">
+      </div>
     </div>
+    
   </div>
 );
 export default Home;
