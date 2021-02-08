@@ -8,7 +8,7 @@ services:
       - POSTGRESQL_PASSWORD=user
       - POSTGRESQL_DATABASE=AuthentificationDB
     ports:
-      - '5002:5002'
+      - '5432:5432'
     volumes:
       - ./Authentification/data/initdb/:/docker-entrypoint-initdb.d
       - ./Authentification/data/initdb/:/bitnami/postgresql
@@ -19,28 +19,27 @@ services:
       - '5000:5000'
     env_file:
       - ./Authentification/.env.prod
-    depends_on:
-      - postgresql
   front:
     build:
       context: ./front
     ports:
       - '5001:3000'
-  postgresqlFaces:
-    image: 'bitnami/postgresql:latest'
-    environment:
-      - POSTGRESQL_USERNAME=user
-      - POSTGRESQL_PASSWORD=user
-      - POSTGRESQL_DATABASE=FacesDB
-    ports:
-      - '5003:5003'
-    volumes:
-      - ./Faces/data/initdb/:/docker-entrypoint-initdb.d
-      - ./Faces/data/initdb/:/bitnami/postgresql
-  faces:
+  profil:
     build:
-      context: ./Faces
+      context: ./profil
     ports:
-      - '5004:5004'
-    depends_on:
-      - postgresqlFaces
+      - '5006:5006'
+    env_file:
+      - ./Profil/.env.prod
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - ./Profil/docker/initdb/:/docker-entrypoint-initdb.d/
+      - ./Profil/docker/data/db/:/data/db/
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: user
+      MONGO_INITDB_DATABASE: ProfilDB
+    ports:
+      - "27017:27017"
