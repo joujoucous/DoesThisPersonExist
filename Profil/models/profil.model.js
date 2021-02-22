@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
 const ProfilSchema = mongoose.Schema({
-    id: String,
+    userId: String,
     email: String,
-    nom: String,
-    prenom: String
+    username: String
 });
 
 module.exports = mongoose.model('Profil', ProfilSchema);

@@ -2,9 +2,30 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
 const Op = db.Sequelize.Op;
+const request = require('request');
+require("dotenv").config();
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+
+function createUserInProfiLService(id, username, email) {
+    /* Ajout de l'utilisateur dans le service profil */
+     request.post({
+         url: `http://${process.env.HOST_CREATE_PROFILE}:${process.env.PORT_CREATE_PROFILE}/profil`,
+         json: true,
+         body: {
+             "userId": id,
+             "username": username,
+             "email": email
+         }
+     }, (err, res, body) => {
+         if (err) {
+             return console.log(err);
+         }
+         console.log(`Status: ${res.statusCode}`);
+         console.log(body);
+     });
+}
 
 exports.signup = (req, res) => {
     // Save User to Database
@@ -12,12 +33,17 @@ exports.signup = (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
+    }).then(result => {
+        console.log('alo');
+        console.log(result.username);
+        createUserInProfiLService(result.id, result.username, result.email);
     }).catch(err => {
             res.status(500).send({ message: err.message });
         });
     res.json({
         message: "Utilisateur enregistré avec succès!"
     });
+
 };
 
 exports.signin = (req, res) => {

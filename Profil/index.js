@@ -1,11 +1,14 @@
 const express = require('express')
+var bodyParser = require('body-parser')
 const app = express()
-
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
 
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
-
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
@@ -19,8 +22,10 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
-require('./app/routes/note.routes.js')(app);
+require('./routes/profil.routes.js')(app);
 
 app.listen(5006, () => {
     console.log("Serveur à l'écoute");
 })
+
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))

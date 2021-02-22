@@ -1,8 +1,8 @@
 db.createCollection( "profils");
 db.profils.insert([
     {
-        prenom: "Angélique",
-        nom: "Souvant",
+        userId: "1000000",
+        username: "Angelique souvant",
         email: "angelique.souvant@gmail.com"
     }
 ])

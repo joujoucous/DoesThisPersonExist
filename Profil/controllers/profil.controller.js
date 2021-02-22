@@ -1,23 +1,16 @@
 const Profil = require('../models/profil.model.js');
 
 exports.create = (req, res) => {
-    if(!req.body.content) {
+    if(!(req.body.userId && req.body.email && req.body.username )) {
         return res.status(400).send({
-            message: "Profil content can not be empty"
-        });
-    }
-
-    if(!req.body.id) {
-        return res.status(400).send({
-            message: "This user need an ID"
+            message: "Profil information are missing or body is empty"
         });
     }
 
     const profil = new Profil({
-        userId: req.body.id,
+        userId: req.body.userId,
         email: req.body.email,
-        nom: req.body.nom,
-        prenom: req.body.prenom,
+        username: req.body.username
     });
 
     profil.save()
@@ -42,76 +35,66 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-    Profil.findById(req.params.profilId)
+    console.log(req.params);
+    Profil.findOne(req.params.userId)
         .then(profil => {
+            console.log(req.params.userId);
             if(!profil) {
                 return res.status(404).send({
-                        message: "Profil not found with id " + req.params.profilId
+                        message: "Profil not found with id " + req.params.userId
                 });
             }
             res.send(profil);
         }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Profil not found with id " + req.params.profilId
+                message: "Profil not found with id " + req.params.userId
             });
         }
         return res.status(500).send({
-            message: "Error retrieving profil with id " + req.params.profilId
+            message: "Error retrieving profil with id " + req.params.userId
         });
     });
 };
 
 exports.update = (req, res) => {
-    // Validate Request
-    if(!req.body.content) {
-        return res.status(400).send({
-            message: "Profil content can not be empty"
-        });
-    }
-
-    Profil.findByIdAndUpdate(req.params.profilId, {
-        id: req.body.id,
-        email: req.body.email,
-        nom: req.body.nom,
-        prenom: req.body.prenom
-    }, {new: true})
+    Profil.findOneAndUpdate(req.params.userId, req.body, {new: true, "overwrite": false})
         .then(profil => {
             if(!profil) {
                 return res.status(404).send({
-                    message: "Profil not found with id " + req.params.profilId
+                    message: "Profil not found with id " + req.params.userId
                 });
             }
             res.send(profil);
         }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Profil not found with id " + req.params.profilId
+                message: "Profil not found with id " + req.params.userId
             });
         }
         return res.status(500).send({
-            message: "Error updating profil with id " + req.params.profilId
+            message: "Error updating profil with id " + req.params.userId
         });
     });
 };
 
 exports.delete = (req, res) => {
-    Profil.findByIdAndRemove(req.params.profilId)
+    Profil.findOneAndRemove(req.params.userId)
         .then(profil => {
             if(!profil) {
                 return res.status(404).send({
-                    message: "Profil not found with id " + req.params.profilId
+                    message: "Profil not found with id " + req.params.userId
                 });
             }
             res.send({message: "Profil deleted successfully!"});
         }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
-                message: "Profil not found with id " + req.params.profilId
+                message: "Profil not found with id " + req.params.userId
             });
         }
         return res.status(500).send({
-            message: "Could not delete profil with id " + req.params.profilId
+            message: "Could not delete profil with id " + req.params.userId
         });
     });
 

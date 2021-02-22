@@ -4,7 +4,8 @@
   "description": "JWT authentification",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "swagger-autogen": "node swagger.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,11 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.4.0"
+    "sequelize": "^6.5.0",
+    "swagger-autogen": "^2.6.6",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "request": "^2.88.2"
   }
 }

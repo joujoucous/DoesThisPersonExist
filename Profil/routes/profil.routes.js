@@ -8,11 +8,11 @@ module.exports = (app) => {
     app.get('/profil', profils.findAll);
 
     // Retrieve a single Note with noteId
-    app.get('/profil/:profilId', profils.findOne);
+    app.get('/profil/:userId', profils.findOne);
 
     // Update a Note with noteId
-    app.put('/profil/:profilId', profils.update);
+    app.put('/profil/:userId', profils.update);
 
     // Delete a Note with noteId
-    app.delete('/profil/:profilId', profils.delete);
+    app.delete('/profil/:userId', profils.delete);
 }
