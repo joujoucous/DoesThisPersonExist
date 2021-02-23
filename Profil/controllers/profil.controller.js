@@ -36,7 +36,7 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
     console.log(req.params);
-    Profil.findOne(req.params.userId)
+    Profil.findOne({userId: req.params.userId})
         .then(profil => {
             console.log(req.params.userId);
             if(!profil) {
@@ -58,7 +58,7 @@ exports.findOne = (req, res) => {
 };
 
 exports.update = (req, res) => {
-    Profil.findOneAndUpdate(req.params.userId, req.body, {new: true, "overwrite": false})
+    Profil.findOneAndUpdate({userId: req.params.userId}, req.body, {new: true, "overwrite": false})
         .then(profil => {
             if(!profil) {
                 return res.status(404).send({
@@ -79,7 +79,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-    Profil.findOneAndRemove(req.params.userId)
+    Profil.findOneAndRemove({userId: req.params.userId})
         .then(profil => {
             if(!profil) {
                 return res.status(404).send({

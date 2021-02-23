@@ -34,7 +34,6 @@ exports.signup = (req, res) => {
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
     }).then(result => {
-        console.log('alo');
         console.log(result.username);
         createUserInProfiLService(result.id, result.username, result.email);
     }).catch(err => {
