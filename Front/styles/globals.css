@@ -170,3 +170,31 @@ h1 {
   top: -5px;
   left: 8px;
 }
+
+#animatedBackground {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: url("/images/Planche contact-002.png");
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-size: auto 100%;
+/*adjust s value for speed*/
+  animation: animatedBackground 500s linear infinite;
+}
+
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+/*use negative width if you want it to flow right to left else and positive for left to right*/
+  to {
+    background-position: -10000px 0;
+  }
+}
+
+#Special {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 25px;
+  padding-bottom: 5px;
+}

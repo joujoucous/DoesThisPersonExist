@@ -4,7 +4,8 @@ import { Form, Button, Container, Row, Col } from "../node_modules/react-bootstr
 const Login = () => (
   <Container>
     <Row className="justify-content-center">
-    <Col>
+    <Col id="animatedBackground">
+      <Container id="Special" >
         <h1>Login</h1>
         <Form>
           <Form.Group controlId="formBasicUsername">
@@ -19,6 +20,7 @@ const Login = () => (
             Submit
           </Button>
         </Form>
+      </Container>
     </Col>
     </Row>
   </Container>
