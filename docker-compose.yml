@@ -43,3 +43,11 @@ services:
       MONGO_INITDB_DATABASE: ProfilDB
     ports:
       - "27017:27017"
+  faces:
+      build: 
+        context: ./faces
+      command: python manage.py runserver 0.0.0.0:8000
+      volumes:
+        - ./faces:/code
+      ports:
+        - "8000:8000"
