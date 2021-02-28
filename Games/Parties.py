@@ -4,6 +4,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from sqlalchemy import desc
 import os
 
 
@@ -42,8 +43,35 @@ partie_schema = PartieSchema()
 parties_schema = PartieSchema(many=True)
 
 
+'''
+GET /api/game/best/user/:id  ﻿﻿La meilleur game d'un joueur FAIT
+GET /api/game/user/:id Toutes les game d'un joueur FAIT
+GET /api/game/:id Information d'une game FAIT
+POST /api/game ﻿Création d'une game FAIT
+PUT /api/game/:id Update d'une game FAIT
+DELETE /api/game/:id Suppression d'une game FAIT
+'''
+
+
+# Meilleure Partie d'un Joueur
+@app.route('/api/game/best/user/<user>', methods=['GET'])
+def best_game_user(user):
+    #stocke les games d'un joueur en ordre croissant et prend la premiere game
+    all_parties_user = Partie.query.filter_by(user=user).order_by(desc(Partie.score)).limit(1).first()
+
+    result = partie_schema.dump(all_parties_user)
+    return jsonify(result)
+
+# Toutes les Parties d'un Joueur
+@app.route('/api/game/user/<user>', methods=['GET'])
+def parties_user(user):
+    all_parties_user = Partie.query.filter_by(user=user).all()
+
+    result = parties_schema.dump(all_parties_user)
+    return jsonify(result)
+
 # Create Partie
-@app.route('/partie', methods=['POST'])
+@app.route('/api/game', methods=['POST'])
 def add_partie():
     user = request.json['user']
     score = request.json['score']
@@ -56,8 +84,28 @@ def add_partie():
     return partie_schema.jsonify(new_partie)
 
 
+# Information Partie
+@app.route('/api/game/<id>', methods=['GET'])
+def info_partie(id):
+    partie_to_send = Partie.query.filter_by(id=id).first_or_404()
+
+    return partie_schema.jsonify(partie_to_send)
+
+# Update Partie
+@app.route('/api/game/<id>', methods=['PUT'])
+def update_partie(id):
+    score_to_update = request.json['score']
+
+    partie_to_update = Partie.query.filter_by(id=id).first_or_404()
+    partie_to_update.score = score_to_update
+
+    db.session.commit()
+
+    return partie_schema.jsonify(partie_to_update)
+
+
 # Delete Partie by id
-@app.route('/delete/<id>', methods=['DELETE'])
+@app.route('/api/game/<id>', methods=['DELETE'])
 def delete_partie(id):
 
     partie_to_delete = Partie.query.filter_by(id=id).first_or_404()
