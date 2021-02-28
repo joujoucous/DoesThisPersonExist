@@ -7,6 +7,14 @@ const swaggerFile = require('./swagger_output.json')
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 mongoose.Promise = global.Promise;

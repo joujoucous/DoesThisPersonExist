@@ -18,7 +18,7 @@ function SignUp() {
       method: 'POST'
     })
 
-    const result = await res.json()
+    const result = await res.json().catch(e => { console.log(e) })
     console.log(result);
     // result.user => 'Ada Lovelace'
   }
