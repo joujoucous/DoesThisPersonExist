@@ -1,20 +1,66 @@
 import Link from "next/link";
-
 import { Container, Button, Image } from 'react-bootstrap';
+import { useState } from 'react';
 
-const Play = () => (
-  <div>
-    <h1>Play</h1>
-    <Link href="/">
-      <a>Back to home</a>
-    </Link>
-    <Container fluid className="d-flex h-100 p-5 flex-column  align-items-center justify-content-center">
-      <Image className="h-25 w-25" src="https://picsum.photos/1024" rounded />
-      <Container fluid className="d-flex h-100 justify-content-center">
-        <Button className="m-5" variant="success">It's real !</Button>
-        <Button className="m-5" variant="danger">It's fake !</Button>
+export async function getServerSideProps(context) {
+  const res = await fetch('http://localhost:8000/face/')
+  const data = await res.json()
+  return {
+    props: {
+      picture: data[0].picture,
+      isGenerated: data[0].isGenerated,
+    },
+  }
+}
+
+const Play = (props) => {
+  const [score, setScore] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [currentImage, setCurrentImage] = useState({
+    picture: props.picture,
+    isGenerated: props.isGenerated
+  })
+
+  const fetchData = async () => {
+    const res = await fetch('http://localhost:8000/face/')
+    const newData = await res.json();
+    return setCurrentImage({
+      picture: newData[0].picture,
+      isGenerated: newData[0].isGenerated
+    });
+  };
+
+
+  const checkAnswer = (answer) => {
+    if (answer === currentImage.isGenerated) {
+      setScore(score + 1)
+      fetchData();
+    } else {
+      setIsGameOver(true)
+    }
+  };
+
+  return (
+    <>
+      <h1>Play</h1>
+      <Link href="/">
+        <a>Back to home</a>
+      </Link>
+      <Container fluid className="d-flex h-100 p-5 flex-column  align-items-center justify-content-center">
+        {isGameOver ?
+          <div>Game over ! Score : {score}</div>
+          :
+          <>
+          <div>Score : {score}</div>
+            <Image className="h-25 w-25" src={"data:image/jpg;base64," + currentImage.picture} rounded />
+            <Container fluid className="d-flex h-100 justify-content-center">
+              <Button onClick={() => { checkAnswer(0) }} className="m-5" variant="success">It's real !</Button>
+              <Button onClick={() => { checkAnswer(1) }} className="m-5" variant="danger">It's fake !</Button>
+            </Container>
+          </>
+        }
       </Container>
-    </Container>
-  </div>
-);
+    </>
+  );
+}
 export default Play;

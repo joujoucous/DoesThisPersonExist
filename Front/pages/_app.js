@@ -6,7 +6,7 @@ import Identification from '../components/identification';
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Identification islogged={false}/>
+      <Identification islogged={true}/>
       <Menu/>
       <Component {...pageProps} />
     </>
