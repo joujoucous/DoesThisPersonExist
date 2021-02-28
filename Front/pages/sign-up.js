@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Form, Button, Container, Row, Col } from "../node_modules/react-bootstrap";
+import { toast, ToastContainer } from 'react-nextjs-toast';
 
 function SignUp() {
 
@@ -19,8 +20,11 @@ function SignUp() {
     })
 
     const result = await res.json().catch(e => { console.log(e) })
-    console.log(result);
-    // result.user => 'Ada Lovelace'
+    toast.notify( result.message, {
+      position : "top",
+      duration: 5
+    });
+    window.location.href = "/login";
   }
 
   return (
@@ -28,6 +32,7 @@ function SignUp() {
     <Row className="justify-content-center">
     <Col id="animatedBackground">
         <Container id="Special" >
+        <ToastContainer />
           <h1>Sign up</h1>
           <Form onSubmit={registerUser} method="POST">
             <Form.Group controlId="formBasicEmail">

@@ -37,7 +37,7 @@ exports.signup = (req, res) => {
         console.log(result.username);
         createUserInProfiLService(result.id, result.username, result.email);
     }).catch(err => {
-            res.status(500).send({ message: err.message });
+            return res.status(500).send({ message: err.message });
         });
     res.json({
         message: "Utilisateur enregistré avec succès!"
@@ -80,6 +80,6 @@ exports.signin = (req, res) => {
             });
         })
         .catch(err => {
-            res.status(500).send({ message: err.message });
+            return res.status(500).send({ message: err.message });
         });
 };

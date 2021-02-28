@@ -21,7 +21,8 @@ function Login() {
 
     const result = await res.json()
     console.log(result);
-    // result.user => 'Ada Lovelace'
+    const token = result.accessToken
+    localStorage.setItem('accessToken', token);
   }
 
 
