@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
   
   return (
     <>
-      <Identification islogged={logged}/>
+      <Identification islogged={true}/>
       <Menu/>
       <Component {...pageProps} />
     </>
