@@ -27,13 +27,6 @@ services:
       - '3000:3000'
     env_file:
       - ./Front/.env.prod
-  profil:
-    build:
-      context: ./profil
-    ports:
-      - '5006:5006'
-    env_file:
-      - ./Profil/.env.prod
   mongodb:
     image: mongo:latest
     container_name: mongodb
