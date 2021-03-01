@@ -21,8 +21,12 @@ function Login() {
 
     const result = await res.json()
     const token = result.accessToken
+    const userId = result.id;
+    console.log(result);
+
     if(token) {
       localStorage.setItem('accessToken', token);
+      localStorage.setItem('userId', userId);
       await router.push('/profil')
     }
   }

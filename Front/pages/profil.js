@@ -1,30 +1,33 @@
 import Link from "next/link";
-import { Form, Button, Container, Row, Col } from "../node_modules/react-bootstrap";
-import {ToastContainer} from "react-nextjs-toast";
+import {Container} from "../node_modules/react-bootstrap";
 
+
+export async function getUserInformation() {
+    const ISSERVER = typeof window === "undefined";;
+    if(!ISSERVER) {
+        const userId= localStorage.getItem('userId')
+        const res = await fetch(`http://${process.env.PROFIL_HOST}:5006/profil/${userId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'GET'
+            })
+        const result = await res.json();
+        return result.username;
+
+    }
+}
 function Profil() {
-
-    let username = "test";
-    let email = "test";
+    getUserInformation();
 
     return (
-
-    <Container>
-        <Row className="justify-content-center">
-            <Container id="Special" >
+        <Container>
+            <div>
                 <h1>Profil</h1>
-                <Form>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Username: {username} </Form.Label>
-                        <br/>
-                        <Form.Label>Email: {email}</Form.Label>
-                    </Form.Group>
-                </Form>
-            </Container>
-        </Row>
-    </Container>
-    );
+            </div>
+        </Container>
 
+    )
 }
 
 export default Profil;
