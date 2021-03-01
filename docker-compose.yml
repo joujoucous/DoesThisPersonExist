@@ -8,7 +8,7 @@ services:
       - POSTGRESQL_PASSWORD=user
       - POSTGRESQL_DATABASE=AuthentificationDB
     ports:
-      - '5432:5432'
+      - '3001:5432'
     volumes:
       - ./Authentification/data/initdb/:/docker-entrypoint-initdb.d
   authentification:
@@ -18,6 +18,8 @@ services:
       - '5000:5000'
     env_file:
       - ./Authentification/.env.prod
+    depends_on: 
+      - postgresql
   front:
     build:
       context: ./front
@@ -32,11 +34,6 @@ services:
       - '5006:5006'
     env_file:
       - ./Profil/.env.prod
-  games:
-    build:
-      context: ./games
-    ports:
-      - '5009:5009'
   mongodb:
     image: mongo:latest
     container_name: mongodb
@@ -49,11 +46,20 @@ services:
       MONGO_INITDB_DATABASE: ProfilDB
     ports:
       - "27017:27017"
+  profil:
+    build:
+      context: ./profil
+    ports:
+      - '5006:5006'
+    env_file:
+      - ./Profil/.env.prod
+    depends_on: 
+      - mongodb
   faces:
-      build:
-        context: ./faces
-      command: python manage.py runserver 0.0.0.0:8000
-      volumes:
-        - ./faces:/code
-      ports:
-        - "8000:8000"
+    build:
+      context: ./faces
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./faces:/code
+    ports:
+      - "8000:8000"

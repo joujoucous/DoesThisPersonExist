@@ -13,35 +13,33 @@ export async function getStaticProps(context) {
 }
 
 const Profil = (props) => {
-    const [data, dataSet] = useState<any>({
+    const [data, setData] = useState({})
 
-    })
+    useEffect( () =>  {
 
-    useEffect(async () => {
-        const ISSERVER = typeof window === "undefined";
-        if(!ISSERVER) {
-            console.log("ALO")
-            const userId= localStorage.getItem('userId')
-            const res = await fetch(`http://${process.env.PROFIL_HOST}:5006/profil/${userId}`)
-            const data = await res.json();
-            console.log(data);
-            return {
-                props: {
-                    username: data.username,
-                    email: data.email,
-                },
+        async function fetchData() {
+            const ISSERVER = typeof window === "undefined";
+            if(!ISSERVER) {
+                console.log("ALO")
+                const userId= localStorage.getItem('userId')
+                const res = await fetch(`http://${process.env.PROFIL_HOST}:5006/profil/${userId}`)
+                const data = await res.json();
+                console.log(data);
+                return setData({
+                        username: data.username,
+                        email: data.email,
+                })
             }
-
         }
-
+        fetchData();
     },[]);
 
         return (
         <Container>
             <div>
                 <h1>Profil</h1>
-                <p>Username: {props.username}</p>
-                <p>Email: {props.email}</p>
+                <p>Username: {data.username}</p>
+                <p>Email: {data.email}</p>
             </div>
         </Container>
 
