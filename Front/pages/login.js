@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { Form, Button, Container, Row, Col } from "../node_modules/react-bootstrap";
+import { useRouter } from 'next/router'
+
 function Login() {
+  const router = useRouter()
 
   const registerUser = async event => {
     event.preventDefault()
@@ -17,9 +20,11 @@ function Login() {
     })
 
     const result = await res.json()
-    console.log(result);
     const token = result.accessToken
-    localStorage.setItem('accessToken', token);
+    if(token) {
+      localStorage.setItem('accessToken', token);
+      await router.push('/profil')
+    }
   }
 
 

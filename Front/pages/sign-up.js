@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Form, Button, Container, Row, Col } from "../node_modules/react-bootstrap";
 import { toast, ToastContainer } from 'react-nextjs-toast';
+import { useRouter } from 'next/router'
 
 function SignUp() {
+  const router = useRouter()
 
   const registerUser = async event => {
     event.preventDefault()
@@ -18,13 +20,17 @@ function SignUp() {
       },
       method: 'POST'
     })
-
-    const result = await res.json().catch(e => { console.log(e) })
-    toast.notify( result.message, {
-      position : "top",
-      duration: 5
-    });
-    window.location.href = "/login";
+    const result = await res.json().catch(e => {
+      console.log(e)
+    }).then((data) => {
+      if(res.status==400){
+        toast.notify( data.message, {
+          duration: 5
+        });
+      }else {
+        router.push('/login')
+      }
+    })
   }
 
   return (

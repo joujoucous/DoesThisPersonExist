@@ -3,6 +3,15 @@ import { useRouter } from 'next/router'
 
 const Menu = () => {
     const router = useRouter()
+    const ISSERVER = typeof window === "undefined";
+
+    const logout= () => {
+        if(!ISSERVER) {
+            localStorage.clear();
+            router.push('/')
+        }
+    }
+
     return (
             <>
                 {
@@ -26,7 +35,7 @@ const Menu = () => {
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
                                 <Nav.Link href="/profil">Profil</Nav.Link>
-                                <Nav.Link href="/">Log out</Nav.Link>
+                                <Nav.Link onClick={logout}>Log out</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
