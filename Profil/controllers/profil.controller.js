@@ -35,10 +35,8 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-    console.log(req.params);
     Profil.findOne({userId: req.params.userId})
         .then(profil => {
-            console.log(req.params.userId);
             if(!profil) {
                 return res.status(404).send({
                         message: "Profil not found with id " + req.params.userId

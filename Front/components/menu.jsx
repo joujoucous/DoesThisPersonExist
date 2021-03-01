@@ -7,7 +7,7 @@ const Menu = () => {
 
     const logout= () => {
         if(!ISSERVER) {
-            localStorage.clear();
+            sessionStorage.clear();
             router.push('/')
         }
     }

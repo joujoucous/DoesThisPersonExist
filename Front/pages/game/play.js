@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Container, Button, Image } from 'react-bootstrap';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 
+/*
 export async function getServerSideProps(context) {
   const res = await fetch(`http://${process.env.FACES_HOST}:8000/face/`)
   const data = await res.json()
@@ -11,16 +12,29 @@ export async function getServerSideProps(context) {
       isGenerated: data[0].isGenerated,
     },
   }
-}
+}*/
+
 
 const Play = (props) => {
+
   const [score, setScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [currentImage, setCurrentImage] = useState({
     picture: props.picture,
     isGenerated: props.isGenerated
   })
+  useEffect( () =>  {
 
+    async function fetchData() {
+      const res = await fetch(`http://${process.env.FACES_HOST}:8000/face/`)
+      const newData = await res.json();
+      return setCurrentImage({
+        picture: newData[0].picture,
+        isGenerated: newData[0].isGenerated
+      });
+    }
+    fetchData();
+  },[]);
   const fetchData = async () => {
     const res = await fetch(`http://${process.env.FACES_HOST}:8000/face/`)
     const newData = await res.json();

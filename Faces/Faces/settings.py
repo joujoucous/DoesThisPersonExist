@@ -128,5 +128,6 @@ STATICFILES_DIRS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://"+str(os.getenv('FRONT_HOST'))+":3000"
+    "http://"+str(os.getenv('FRONT_HOST'))+":3000",
+    "http://localhost:3000"
 ]

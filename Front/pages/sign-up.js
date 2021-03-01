@@ -43,7 +43,7 @@ function SignUp() {
           <Form onSubmit={registerUser} method="POST">
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control name="email" type="text" placeholder="Enter email adress" />
+              <Form.Control name="email" type="email" placeholder="Enter email adress" />
             </Form.Group>
             <Form.Group controlId="formBasicUsername">
               <Form.Label>Username</Form.Label>

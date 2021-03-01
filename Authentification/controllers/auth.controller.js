@@ -22,8 +22,6 @@ function createUserInProfiLService(id, username, email) {
          if (err) {
              return console.log(err);
          }
-         console.log(`Status: ${res.statusCode}`);
-         console.log(body);
      });
 }
 
@@ -34,7 +32,6 @@ exports.signup = (req, res) => {
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
     }).then(result => {
-        console.log(result.username);
         createUserInProfiLService(result.id, result.username, result.email);
     }).catch(err => {
             return res.status(500).send({ message: err.message });
