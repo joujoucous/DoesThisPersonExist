@@ -1,14 +1,11 @@
 import Link from "next/link";
 import { Form, Button, Container, Row, Col } from "../node_modules/react-bootstrap";
-
-
-
 function Login() {
 
   const registerUser = async event => {
     event.preventDefault()
 
-    const res = await fetch('http://localhost:5000/api/auth/login', {
+    const res = await fetch(`http://${process.env.AUTH_HOST}:5000/api/auth/login`, {
       body: JSON.stringify({
         username: event.target.login.value,
         password: event.target.password.value        

@@ -3,7 +3,7 @@ import { Container, Button, Image } from 'react-bootstrap';
 import { useState } from 'react';
 
 export async function getServerSideProps(context) {
-  const res = await fetch('http://localhost:8000/face/')
+  const res = await fetch(`http://${process.env.FACES_HOST}:8000/face/`)
   const data = await res.json()
   return {
     props: {
@@ -22,7 +22,7 @@ const Play = (props) => {
   })
 
   const fetchData = async () => {
-    const res = await fetch('http://localhost:8000/face/')
+    const res = await fetch(`http://${process.env.FACES_HOST}:8000/face/`)
     const newData = await res.json();
     return setCurrentImage({
       picture: newData[0].picture,
