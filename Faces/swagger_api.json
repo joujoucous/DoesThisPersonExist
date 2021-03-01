@@ -1,0 +1,42 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Faces API",
+    "description": "Architecture micro service project, faces microservice apis"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000"
+    }
+  ],
+  "paths": {
+    "/face/": {
+      "get": {
+        "description": "Returns a random face img generated or not.",
+        "responses": {
+          "200": {
+            "description": "A JSON object containing a face img and a the generated information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "picture": {
+                      "type": "string",
+                      "format": "base64",
+                      "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF......."
+                    },
+                    "isGenerated": {
+                      "type": "bool",
+                      "example": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
