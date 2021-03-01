@@ -20,11 +20,9 @@ const Profil = (props) => {
         async function fetchData() {
             const ISSERVER = typeof window === "undefined";
             if(!ISSERVER) {
-                console.log("ALO")
-                const userId= localStorage.getItem('userId')
+                const userId= sessionStorage.getItem('userId')
                 const res = await fetch(`http://${process.env.PROFIL_HOST}:5006/profil/${userId}`)
                 const data = await res.json();
-                console.log(data);
                 return setData({
                         username: data.username,
                         email: data.email,

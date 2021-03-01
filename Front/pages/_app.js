@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
   let logged = false;
   console.log(logged);
   if(!ISSERVER) {
-      const token = localStorage.getItem('accessToken')
+      const token = sessionStorage.getItem('accessToken')
       if(token) {
           logged = async () => {
               const res = await fetch(`http://${process.env.AUTH_HOST}:5000/api/verify`, {

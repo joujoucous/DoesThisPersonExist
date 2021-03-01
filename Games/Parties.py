@@ -45,7 +45,7 @@ parties_schema = PartieSchema(many=True)
 
 '''
 GET /api/game/best/user/:id  ﻿﻿La meilleur game d'un joueur FAIT
-GET /api/game/user/:id Toutes les game d'un joueur FAIT
+GET /api/game/user/:id Toutes les  game d'un joueur FAIT
 GET /api/game/:id Information d'une game FAIT
 POST /api/game ﻿Création d'une game FAIT
 PUT /api/game/:id Update d'une game FAIT
