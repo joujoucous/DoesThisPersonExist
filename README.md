@@ -3,6 +3,8 @@ L'objectif du projet est de développer un jeux avec en architecture micro conte
 
 Le but du jeu est de deviner si l'image correspond à un vrai visage ou un faux visage généré.
 
+Le readme pdf et le diapo de présentation du projet sont disponiles dans le repo
+
 ## Démarer le projet
 
 - Démarrer docker
