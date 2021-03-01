@@ -4,7 +4,7 @@ import Menu from '../components/menu';
 import Identification from '../components/identification';
 
 function MyApp({ Component, pageProps }) {
-
+/*
   let logged = false;
   const token = localStorage.getItem('accessToken')
   
@@ -19,10 +19,10 @@ function MyApp({ Component, pageProps }) {
     logged = res.json()
     console.log(res.json());
     
-  
+  */
   return (
     <>
-      <Identification islogged={true}/>
+      <Identification islogged={false}/>
       <Menu/>
       <Component {...pageProps} />
     </>

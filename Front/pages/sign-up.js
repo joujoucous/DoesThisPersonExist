@@ -7,7 +7,7 @@ function SignUp() {
   const registerUser = async event => {
     event.preventDefault()
 
-    const res = await fetch('http://localhost:5000/api/auth/register', {
+    const res = await fetch(`http://${process.env.AUTH_HOST}:5000/api/auth/register`, {
       body: JSON.stringify({
         username: event.target.login.value,
         email: event.target.email.value,
