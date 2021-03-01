@@ -54,5 +54,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./faces:/code
+    env_file:
+      - ./Faces/.env.prod
     ports:
       - "8000:8000"
