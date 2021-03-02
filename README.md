@@ -12,9 +12,6 @@ Le readme pdf et le diapo de présentation du projet sont disponiles dans le rep
 
 `docker-compose up -d`
 
-## Service Manquant
-
-Le service games est indisponible pour le moment (problème pour appeler les API une fois le service sur docker)
 
 ## **Swagger**
 
@@ -32,7 +29,7 @@ Les points d'api suivants sont affichés avec swagger sur les URL suivantes une 
 - Cliquer sur **Sign up** en haut à gauche de la page
 - Créer un profil utilisateur ( vous serez redirigé sur la page **Login**)
 - Se connecter en entre nom d'utilisateur et mot de passe
-- On arrive sur le profil ou les informations nom utilisateur et email sont affichées
+- On arrive sur le profil ou les informations nom utilisateur et email et le meilleur score sont affichées
 - Cliquer sur **PLAY** pour jouer ! Une fois la partie perdue
 - Appuyer de nouveau sur **PLAY** pour jouer
 - Vous avez la possibilité de vous déconnecté une fois terminé avec le bouton **Logout** du menu
