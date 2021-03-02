@@ -6,10 +6,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from sqlalchemy import desc
 import os
-
+from flask_cors import CORS
 
 # Initialize App
 app = Flask(__name__)
+CORS(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Database Setup
@@ -128,4 +129,4 @@ db.create_all()
 
 # Run the Server
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5009,host="0.0.0.0")

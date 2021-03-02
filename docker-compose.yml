@@ -62,4 +62,4 @@ services:
     build:
       context: ./games
     ports:
-    - "5000:5009"
+    - "5009:5009"

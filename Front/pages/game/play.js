@@ -2,19 +2,6 @@ import Link from "next/link";
 import { Container, Button, Image } from 'react-bootstrap';
 import {useEffect, useState} from 'react';
 
-/*
-export async function getServerSideProps(context) {
-  const res = await fetch(`http://${process.env.FACES_HOST}:8000/face/`)
-  const data = await res.json()
-  return {
-    props: {
-      picture: data[0].picture,
-      isGenerated: data[0].isGenerated,
-    },
-  }
-}*/
-
-
 const Play = (props) => {
 
   const [score, setScore] = useState(0);
@@ -44,12 +31,28 @@ const Play = (props) => {
     });
   };
 
+  const saveScore = async () => {
+    const userId = sessionStorage.getItem('userId');
+
+    const res = await fetch(`http://${process.env.GAMES_HOST}:${process.env.GAMES_PORT}/api/game`, {
+      body: JSON.stringify({
+        user: userId,
+        score: score
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    })
+  };
+
 
   const checkAnswer = (answer) => {
     if (answer === currentImage.isGenerated) {
       setScore(score + 1)
       fetchData();
     } else {
+      saveScore();
       setIsGameOver(true)
     }
   };
