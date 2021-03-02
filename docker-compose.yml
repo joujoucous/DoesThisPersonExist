@@ -58,3 +58,8 @@ services:
       - ./Faces/.env.prod
     ports:
       - "8000:8000"
+  games:
+    build:
+      context: ./games
+    ports:
+    - "5000:5009"
